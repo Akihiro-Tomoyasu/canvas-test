@@ -10,7 +10,7 @@ function canvasWave(){
 	var w = document.documentElement.clientWidth;
 	var h = w / heightRatio;
 	
-	var canvas = document.getElementById('testCanvas');
+	var canvas = document.getElementById('canvasWave');
 	canvas.width = w
 	canvas.height = h;
 	
@@ -25,47 +25,42 @@ function canvasWave(){
 	
 	var ctx = canvas.getContext("2d");
 
+	var s1 = s2 = s3 = s4 = s5 = 0;
 	function loop(){ //繰り返される関数
 		ctx.clearRect(0, 0, w, h);
-		wave1();
-		wave2();
-		wave3();
+		
+		//波1
+		drawWave('blue', 2, 1.6, s1); //(色,線幅,周期,速度)
+		s1 += 5; //速度
+		
+		//波2
+		drawWave('yellow', 2, 2.2, s2); //(色,線幅,周期,速度)
+		s2 += 10; //速度
+		
+		//波3
+		drawWave('red', 2, 3, s3); //(色,線幅,周期,速度)
+		s3 += 15; //速度
+		
+		//波4
+		drawWave('pink', 2, 4.1, s4); //(色,線幅,周期,速度)
+		s4 += 20; //速度
+		
+		//波5
+		drawWave('green', 2, 5.2, s5); //(色,線幅,周期,速度)
+		s5 += 30; //速度
+
+		//外枠
+		ctx.beginPath();
+		ctx.strokeStyle = "rgb(0, 0, 0)";
+		ctx.strokeRect(0, 0, w, h);
+		
+		//繰り返し
 		requestAnimationFrame(loop);
 	};
 
 	loop();
 
-	var degree = 0;
-	function wave1(){
-		lineColor = 'red'; //色
-		lineH = 2; //線幅
-		T = 2; // 周期
-		speed = 20; //速度
-		drawWave(lineColor,lineH,degree);
-		degree += speed;
-	}
-	
-	var degree2 = 0;
-	function wave2(){
-		lineColor = 'red'; //色
-		lineH = 2; //線幅
-		T = 3.5; // 周期
-		speed = 5; //速度
-		drawWave(lineColor,lineH,degree2);
-		degree2 += speed;
-	}
-
-	var degree3 = 0;
-	function wave3(){
-		lineColor = 'red'; //色
-		lineH = 2; //線幅
-		T = 5; // 周期
-		speed = 5; //速度
-		drawWave(lineColor,lineH,degree3);
-		degree3 += speed;
-	}
-
-	function drawWave(lineColor,lineH,degree) {
+	function drawWave(lineColor,lineH,T,degree){
 		ctx.beginPath();
 		ctx.strokeStyle = lineColor;
 		ctx.lineWidth = lineH;
