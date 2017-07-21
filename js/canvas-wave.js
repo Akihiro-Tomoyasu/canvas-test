@@ -25,29 +25,39 @@ function canvasWave(){
 	
 	var ctx = canvas.getContext("2d");
 
-	var s1 = s2 = s3 = s4 = s5 = 0;
+	var s1 = s2 = s3 = s4 = s5 = s6 = s7 = s8 = s9 = s10 = 0;
 	function loop(){ //繰り返される関数
 		ctx.clearRect(0, 0, w, h);
 		
 		//波1
-		drawWave('blue', 2, 1.6, s1); //(色,線幅,周期,速度)
-		s1 += 5; //速度
+		drawWave('blue', 2, 2, 100, s1); //(色,線幅,周期,振幅,速度)
+		s1 += 10; //速度
 		
 		//波2
-		drawWave('yellow', 2, 2.2, s2); //(色,線幅,周期,速度)
+		drawWave('yellow', 2, 2, 90, s2); //(色,線幅,周期,振幅,速度)
 		s2 += 10; //速度
 		
 		//波3
-		drawWave('red', 2, 3, s3); //(色,線幅,周期,速度)
-		s3 += 15; //速度
+		drawWave('red', 2, 2, 80, s3); //(色,線幅,周期,振幅,速度)
+		s3 += 10; //速度
 		
 		//波4
-		drawWave('pink', 2, 4.1, s4); //(色,線幅,周期,速度)
-		s4 += 20; //速度
+		drawWave('pink', 2, 2, 70, s4); //(色,線幅,周期,振幅,速度)
+		s4 += 10; //速度
 		
 		//波5
-		drawWave('green', 2, 5.2, s5); //(色,線幅,周期,速度)
-		s5 += 30; //速度
+		drawWave('green', 2, 2, 60, s5); //(色,線幅,周期,振幅,速度)
+		s5 += 10; //速度
+
+		drawWave('green', 2, 2, 50, s6); //(色,線幅,周期,振幅,速度)
+		s6 += 10; //速度
+		
+		drawWave('green', 2, 2, 40, s7); //(色,線幅,周期,振幅,速度)
+		s7 += 10; //速度
+		
+		drawWave('green', 2, 2, 30, s8); //(色,線幅,周期,振幅,速度)
+		s8 += 10; //速度
+		
 
 		//外枠
 		ctx.beginPath();
@@ -60,14 +70,14 @@ function canvasWave(){
 
 	loop();
 
-	function drawWave(lineColor,lineH,T,degree){
+	function drawWave(lineColor,lineH,T,H,S){
 		ctx.beginPath();
 		ctx.strokeStyle = lineColor;
 		ctx.lineWidth = lineH;
-		var shiten = (-1 * (h / 2 - lineH)) * Math.sin((2 * Math.PI / (w * T)) * degree) + (h / 2); //始点 = 幅振 * sinうんたら
+		var shiten = (-1 * (h / 2 - lineH)) * Math.sin((2 * Math.PI / (w * T)) * S) + (h / 2); //始点 = 幅振 * sinうんたら
 		ctx.moveTo(0, shiten); //始点
 		for (var x = 0; x < w; x++) {
-			var y = (-1 * (h / 2 - lineH)) * Math.sin((2 * Math.PI / (w * T)) * (degree + x));
+			var y = (-1 * (h / 2 - lineH)) * Math.sin((2 * Math.PI / (w * T)) * (S + x)) * (0.01 * H);
 			ctx.lineTo(x, y + (h / 2));
 		}
 		ctx.stroke();
